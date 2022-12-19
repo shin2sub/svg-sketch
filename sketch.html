@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>그림판</title>
+
+	<style type="text/css">
+		.wrap {
+			width: 1000px;
+			height: 500px;
+			overflow: hidden;
+			border: solid 3px #ccc;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="wrap"></div>
+
+	<p>도형</p>
+	<input type="button" value="pencil" class="btn pencil-btn" />
+	<input type="button" value="line" class="btn line-btn" />
+	<input type="button" value="rectangle" class="btn rectangle-btn" />
+	<input type="button" value="circle" class="btn circle-btn" />
+	<input type="button" value="text" class="btn text-btn" />
+
+	<p>면 색</p>
+	<input type="button" value="black" class="area-color-btn" />
+	<input type="button" value="red" class="area-color-btn" />
+	<input type="button" value="green" class="area-color-btn" />
+	<input type="button" value="blue" class="area-color-btn" />
+
+	<p>선 색</p>
+	<input type="button" value="black" class="line-color-btn" />
+	<input type="button" value="red" class="line-color-btn" />
+	<input type="button" value="green" class="line-color-btn" />
+	<input type="button" value="blue" class="line-color-btn" />
+
+	<p>기타</p>
+	<input type="button" value="remove" class="remove-btn" />
+	<input type="button" value="deselect" class="deselect-btn" />
+
+	<script type="text/javascript" src="./lib/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="./lib/raphael.js"></script>
+	<script type="text/javascript" src="./lib/sketch.js"></script>
+
+	<script type="text/javascript">
+
+	var url = './img/background.jpg';
+
+	var sketch = yisub.sketch.init($('.wrap'), url);
+
+	$('.btn').on('click', function () {
+
+		var shape = this.value;
+
+		sketch.drawItem(shape);
+	});
+
+	$('.area-color-btn').on('click', function () {
+
+		var color = this.value;
+
+		var styles = {
+			item: {
+				'fill': color,
+				'fill-opacity' : 1
+			}
+		};
+
+		sketch.setStyles(styles);
+	});
+
+	$('.line-color-btn').on('click', function () {
+
+		var color = this.value;
+
+		var styles = {
+			item: {
+				'stroke': color,
+				'stroke-width': 1,
+				'stroke-opacity': 1
+			}
+		};
+
+		sketch.setStyles(styles);
+	});
+
+	$('.remove-btn').on('click', function () {
+
+		sketch.removeItem();
+	});
+
+	$('.deselect-btn').on('click', function () {
+
+		sketch.deselect();
+	});
+
+	</script>
+</body>
+</html>
